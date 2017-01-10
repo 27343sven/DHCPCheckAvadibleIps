@@ -15,7 +15,7 @@ foreach ($line in $(netsh dhcp server scope 192.168.1.0 show clients)){
 		$ip = $line.split('')[0]
 		[int]$number = $line.split('')[0].split(".")[3]
 		$valid = 0
-		for ($i=0, $i < $range_start.length; $i++){
+		for ($i=0; $i -lt $range_start.length; $i++){
 			if (-Not $number -lt $range_start[$i] -And -Not $number -gt $range_end[$i]){
 				$valid = 1
 			}
