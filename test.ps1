@@ -14,18 +14,13 @@ foreach ($line in $(netsh dhcp server scope 192.168.1.0 show clients)){
 	if ($line -match '^[0-9]'){
 		$ip = $line.split('')[0]
 		[int]$number = $line.split('')[0].split(".")[3]
-		$isValid = 1
-		foreach ($start in $range_start){
-			if ($number -lt $start){
-				$isValid = 0
+		$valid = 0
+		for ($i=0, $i < $range_start.length; $i++){
+			if (-Not $number -lt $range_start[$i] -And -Not $number -gt $range_end[$i]){
+				$valid = 1
 			}
 		}
-		foreach ($end in $range_end){
-			if ($number -gt $end){
-				$isValid = 0
-			}
-		}
-		if ($isValid -eq 1){
+		if ($valid -eq 1){
 			$ips += $ip
 		}
 	}
