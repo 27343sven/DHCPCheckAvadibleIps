@@ -27,7 +27,6 @@ foreach ($line in $(netsh dhcp server scope 192.168.1.0 show clients)){
 }
 
 [int]$ips_left = $total_ips - $ips.length
-$ips_left = 0
 $severety = 14
 $hostname = "192.168.1.3"
 $time = Get-Date -Format "yyyy:MM:dd:-HH:mm:ss zzz"
